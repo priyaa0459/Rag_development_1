@@ -1,0 +1,10 @@
+supabase
+sentence-transformers
+transformers
+cohere
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+torch
