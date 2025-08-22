@@ -272,7 +272,7 @@ class SupabaseVectorLoader:
 
     def test_similarity_search(self, query_text: str, top_k: int = 5):
         """Semantic search with OpenAI embedding and improved matching thresholds.
-        Workflow: threshold 0.5 → if none, threshold 0.0 → if none, keyword fallback. Always request 5.
+        Workflow: threshold 0.5 → if none, threshold 0.0 → if none, keyword fallback. Always request 5 unique instructions.
         """
         print(f"Testing similarity search with query: '{query_text[:100]}...'")
         try:
@@ -280,32 +280,75 @@ class SupabaseVectorLoader:
             query_embedding = self.generate_openai_embedding(query_text)
             print("Query embedding generated using: text-embedding-ada-002")
 
-            # First attempt: threshold 0.5
-            result = self.supabase.rpc('search_sap_iflow_chunks', {
-                'query_embedding': query_embedding,
-                'match_threshold': 0.5,
-                'match_count': 5,
-                'filter_model': 'text-embedding-ada-002'
-            }).execute()
+            def get_unique_results(match_threshold: float, initial_match_count: int = 20):
+                """Get unique results with given threshold, increasing match_count if needed."""
+                match_count = initial_match_count
+                max_attempts = 3  # Prevent infinite loops
+                
+                for attempt in range(max_attempts):
+                    result = self.supabase.rpc('search_sap_iflow_chunks', {
+                        'query_embedding': query_embedding,
+                        'match_threshold': match_threshold,
+                        'match_count': match_count,
+                        'filter_model': 'text-embedding-ada-002'
+                    }).execute()
+                    
+                    data = result.data or []
+                    if not data:
+                        return []
+                    
+                    # Filter for unique instructions
+                    unique_chunks = []
+                    seen_instructions = set()
+                    
+                    for chunk in data:
+                        instruction = chunk.get('instruction', '').strip()
+                        if instruction and instruction not in seen_instructions:
+                            unique_chunks.append(chunk)
+                            seen_instructions.add(instruction)
+                            
+                            if len(unique_chunks) >= top_k:
+                                break
+                    
+                    # If we have enough unique results, return them
+                    if len(unique_chunks) >= top_k:
+                        return unique_chunks[:top_k]
+                    
+                    # If not enough unique results, increase match_count for next attempt
+                    if attempt < max_attempts - 1:
+                        match_count = min(match_count * 2, 100)  # Cap at 100
+                        print(f"Only {len(unique_chunks)} unique results found, increasing match_count to {match_count}...")
+                    
+                # Return whatever unique results we found
+                return unique_chunks[:top_k]
 
-            data = result.data or []
+            # First attempt: threshold 0.5
+            print("Searching with threshold 0.5...")
+            data = get_unique_results(0.5)
+            
             if not data:
                 # Retry with threshold 0.0
                 print("No results at threshold 0.5, retrying with threshold 0.0...")
-                result = self.supabase.rpc('search_sap_iflow_chunks', {
-                    'query_embedding': query_embedding,
-                    'match_threshold': 0.0,
-                    'match_count': 5,
-                    'filter_model': 'text-embedding-ada-002'
-                }).execute()
-                data = result.data or []
+                data = get_unique_results(0.0)
 
             if not data:
                 print("No semantic results even at 0.0, using keyword fallback...")
-                data = self._keyword_fallback_search(query_text, limit=5)
+                data = self._keyword_fallback_search(query_text, limit=top_k)
+                # Ensure keyword results are also unique
+                if data:
+                    unique_chunks = []
+                    seen_instructions = set()
+                    for chunk in data:
+                        instruction = chunk.get('instruction', '').strip()
+                        if instruction and instruction not in seen_instructions:
+                            unique_chunks.append(chunk)
+                            seen_instructions.add(instruction)
+                            if len(unique_chunks) >= top_k:
+                                break
+                    data = unique_chunks[:top_k]
 
             if data:
-                print(f"Found {len(data)} similar chunks:")
+                print(f"Found {len(data)} unique similar chunks:")
                 for i, chunk in enumerate(data):
                     sim = chunk.get('similarity')
                     if sim is not None:
