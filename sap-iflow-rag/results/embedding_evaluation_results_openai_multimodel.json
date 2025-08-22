@@ -1,0 +1,41 @@
+{
+  "text-embedding-ada-002": {
+    "model_name": "text-embedding-ada-002",
+    "embedding_time": 2.3527793884277344,
+    "avg_time_per_text": 0.07842597961425782,
+    "embedding_dimension": 1536,
+    "sample_size": 30,
+    "memory_usage_mb": 0.3515625,
+    "avg_similarity": 0.0,
+    "similarity_std": 0.0,
+    "was_padded": false,
+    "original_dimension": 1536,
+    "clustering_score": 0.0
+  },
+  "microsoft/codebert-base": {
+    "model_name": "microsoft/codebert-base",
+    "embedding_time": 14.4404878616333,
+    "avg_time_per_text": 0.4813495953877767,
+    "embedding_dimension": 1536,
+    "sample_size": 30,
+    "memory_usage_mb": 0.17578125,
+    "avg_similarity": 0.9891921281814575,
+    "similarity_std": 0.005521870218217373,
+    "was_padded": true,
+    "original_dimension": 768,
+    "clustering_score": 0.05286445841193199
+  },
+  "sentence-transformers/all-MiniLM-L6-v2": {
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_time": 2.025153636932373,
+    "avg_time_per_text": 0.0675051212310791,
+    "embedding_dimension": 1536,
+    "sample_size": 30,
+    "memory_usage_mb": 0.17578125,
+    "avg_similarity": 0.5396106839179993,
+    "similarity_std": 0.13736295700073242,
+    "was_padded": true,
+    "original_dimension": 1536,
+    "clustering_score": 0.04660489037632942
+  }
+}

@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Activate virtual environment (modify path if needed)
-source sap-iflow-rag/Scripts/activate
+# Load SAP iFlow data to vector database with OpenAI multi-model strategy
+echo "Loading SAP iFlow data to vector database with OpenAI multi-model strategy..."
 
-echo "Starting vector data loading to Supabase..."
-python ../src/vector_loader_cohere.py
+# Run the vector loader script
+python ../src/vector_loader_openai.py
+
+echo "Data loading complete!"

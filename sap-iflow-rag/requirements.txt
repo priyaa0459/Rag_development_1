@@ -1,7 +1,7 @@
 supabase
 sentence-transformers
 transformers
-cohere
+openai
 pandas
 numpy
 scikit-learn

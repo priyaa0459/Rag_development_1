@@ -1,8 +1,8 @@
 """
-SAP iFlow Embedding Model Evaluation Framework (Updated for Cohere)
+SAP iFlow Embedding Model Evaluation Framework (Updated for OpenAI)
 Person 1: Vector Storage and Embedding Research
 
-Comprehensive evaluation of embedding models including Cohere for SAP iFlow code retrieval.
+Comprehensive evaluation of embedding models including OpenAI for SAP iFlow code retrieval.
 """
 
 import pandas as pd
@@ -139,36 +139,36 @@ class SAP_iFlowEmbeddingEvaluator:
         
         return clustering_results
     
-    def evaluate_cohere_specific_metrics(self, cohere_embeddings: np.ndarray, 
+    def evaluate_openai_specific_metrics(self, openai_embeddings: np.ndarray, 
                                        local_embeddings: np.ndarray,
                                        texts: List[str]) -> Dict:
-        """Evaluate Cohere-specific performance compared to local models."""
+        """Evaluate OpenAI-specific performance compared to local models."""
         
-        cohere_results = {}
+        openai_results = {}
         
         # Embedding quality comparison
-        if cohere_embeddings.shape[0] == local_embeddings.shape[0]:
+        if openai_embeddings.shape[0] == local_embeddings.shape[0]:
             # Calculate correlation between embedding spaces
-            cohere_flat = cohere_embeddings.flatten()
+            openai_flat = openai_embeddings.flatten()
             local_flat = local_embeddings.flatten()
             
             # Sample for correlation (too many points for full correlation)
-            sample_size = min(10000, len(cohere_flat))
-            indices = np.random.choice(len(cohere_flat), sample_size, replace=False)
+            sample_size = min(10000, len(openai_flat))
+            indices = np.random.choice(len(openai_flat), sample_size, replace=False)
             
-            correlation = np.corrcoef(cohere_flat[indices], local_flat[indices])[0, 1]
-            cohere_results['embedding_space_correlation'] = correlation
+            correlation = np.corrcoef(openai_flat[indices], local_flat[indices])[0, 1]
+            openai_results['embedding_space_correlation'] = correlation
         
         # Semantic richness (higher dimensional space)
-        cohere_results['embedding_dimension'] = cohere_embeddings.shape[1]
-        cohere_results['local_dimension'] = local_embeddings.shape[1]
-        cohere_results['dimension_ratio'] = cohere_embeddings.shape[1] / local_embeddings.shape[1]
+        openai_results['embedding_dimension'] = openai_embeddings.shape[1]
+        openai_results['local_dimension'] = local_embeddings.shape[1]
+        openai_results['dimension_ratio'] = openai_embeddings.shape[1] / local_embeddings.shape[1]
         
         # Variance in embedding space (indicates semantic richness)
-        cohere_results['cohere_variance'] = np.var(cohere_embeddings, axis=0).mean()
-        cohere_results['local_variance'] = np.var(local_embeddings, axis=0).mean()
+        openai_results['openai_variance'] = np.var(openai_embeddings, axis=0).mean()
+        openai_results['local_variance'] = np.var(local_embeddings, axis=0).mean()
         
-        return cohere_results
+        return openai_results
     
     def evaluate_code_type_specificity(self, embeddings: np.ndarray, output_types: List[str]) -> Dict:
         """Evaluate how well embeddings distinguish between different types of SAP iFlow code."""
@@ -215,7 +215,7 @@ class SAP_iFlowEmbeddingEvaluator:
                 'code_type_specificity': {},
                 'model_info': {
                     'dimension': embeddings.shape[1],
-                    'type': 'cohere' if 'cohere' in model_name.lower() else 'local'
+                    'type': 'openai' if 'text-embedding-ada-002' in model_name else 'local'
                 }
             }
             
@@ -231,17 +231,16 @@ class SAP_iFlowEmbeddingEvaluator:
         
         return benchmark_results
     
-    def generate_cohere_comparison_report(self, results: Dict, cohere_cost_info: Dict = None) -> str:
-        """Generate a comprehensive evaluation report comparing Cohere with local models."""
+    def generate_openai_comparison_report(self, results: Dict, openai_cost_info: Dict = None) -> str:
+        """Generate a comprehensive evaluation report comparing OpenAI with local models."""
         
-        report = """# SAP iFlow Embedding Model Evaluation Report (with Cohere)
+        report = """# SAP iFlow Embedding Model Evaluation Report (with OpenAI)
 
 ## Executive Summary
 
 This report evaluates embedding models for the SAP iFlow RAG pipeline, comparing:
-- **Cohere embed-english-v3** (1024D, API-based)
-- **Cohere embed-multilingual-v3** (1024D, API-based)  
-- **Sentence Transformers** (384D, local)
+- **OpenAI text-embedding-ada-002** (1536D, API-based)
+- **Sentence Transformers** (384D, local)  
 - **CodeBERT** (768D, local)
 
 Focus areas: SAP-specific code retrieval, semantic clustering, and cost-effectiveness.
@@ -267,10 +266,10 @@ SAP iFlow-specific queries across categories:
         
         # Add detailed results for each model
         for model_name, model_results in results.items():
-            is_cohere = 'cohere' in model_name.lower()
+            is_openai = 'text-embedding-ada-002' in model_name
             
             report += f"### {model_name}\n"
-            report += f"**Type**: {'API-based (Cohere)' if is_cohere else 'Local model'}\n"
+            report += f"**Type**: {'API-based (OpenAI)' if is_openai else 'Local model'}\n"
             
             if 'model_info' in model_results:
                 info = model_results['model_info']
@@ -300,19 +299,19 @@ SAP iFlow-specific queries across categories:
             report += "\n"
         
         # Cost analysis section
-        if cohere_cost_info:
+        if openai_cost_info:
             report += """## Cost Analysis
 
-### Cohere API Costs
+### OpenAI API Costs
 """
-            for key, value in cohere_cost_info.items():
+            for key, value in openai_cost_info.items():
                 report += f"- **{key}**: {value}\n"
             
             report += """
 ### Cost Comparison
 - **Local Models**: One-time setup cost, ongoing compute resources
-- **Cohere API**: Per-embedding pricing, no infrastructure management
-- **Hybrid Approach**: Cohere for queries, local for bulk document processing
+- **OpenAI API**: Per-embedding pricing, no infrastructure management
+- **Hybrid Approach**: OpenAI for queries, local for bulk document processing
 """
         
         report += """## Recommendations
@@ -320,18 +319,18 @@ SAP iFlow-specific queries across categories:
 ### Production Deployment Strategy:
 
 #### Primary Recommendation: Hybrid Approach
-1. **Query Processing**: Use **Cohere embed-english-v3** for user queries
-   - Higher dimensional embeddings (1024D) for better semantic understanding
-   - Optimized for search queries with `input_type='search_query'`
-   - Better handling of natural language questions
+1. **Query Processing**: Use **OpenAI text-embedding-ada-002** for user queries
+   - Higher dimensional embeddings (1536D) for better semantic understanding
+   - Optimized for search queries and natural language questions
+   - Better handling of complex technical queries
 
 2. **Document Storage**: Use **all-MiniLM-L6-v2** for bulk SAP iFlow embedding
    - Cost-effective for large document collections
    - Fast local processing for batch operations
    - Sufficient quality for document representation
 
-#### Alternative: Pure Cohere Approach
-- Use Cohere for both queries and documents if budget allows
+#### Alternative: Pure OpenAI Approach
+- Use OpenAI for both queries and documents if budget allows
 - Best semantic quality and consistency
 - Requires API rate limit management
 
@@ -342,8 +341,8 @@ SAP iFlow-specific queries across categories:
 
 ### Implementation Considerations:
 
-#### For Cohere Integration:
-- Implement proper rate limiting (96 texts per batch)
+#### For OpenAI Integration:
+- Implement proper rate limiting (100 texts per batch)
 - Add retry logic for API failures
 - Monitor usage and costs
 - Cache embeddings to avoid re-computation
@@ -355,12 +354,12 @@ SAP iFlow-specific queries across categories:
 
 #### Performance Optimization:
 - Batch embed documents during off-peak hours
-- Use Cohere for real-time query processing
+- Use OpenAI for real-time query processing
 - Implement semantic caching for frequent queries
 
 ### Next Steps:
 1. **Implement hybrid embedding strategy**
-2. **Set up cost monitoring for Cohere API**
+2. **Set up cost monitoring for OpenAI API**
 3. **Create fallback mechanisms for API failures**
 4. **Monitor retrieval performance in production**
 5. **Fine-tune similarity thresholds based on user feedback**
@@ -375,21 +374,21 @@ ADD COLUMN embedding_model VARCHAR(100),
 ADD COLUMN embedding_dimension INTEGER;
 
 -- Create separate similarity search functions for different models
-CREATE OR REPLACE FUNCTION search_with_cohere_embeddings(...)
+CREATE OR REPLACE FUNCTION search_with_openai_embeddings(...)
 CREATE OR REPLACE FUNCTION search_with_local_embeddings(...)
 ```
 
 ### API Integration Pattern:
 ```python
 async def get_embedding(text, is_query=False):
-    if is_query and cohere_available():
-        return await cohere_embed(text, input_type='search_query')
+    if is_query and openai_available():
+        return await openai_embed(text)
     else:
         return local_model.encode([text])[0]
 ```
 
 ### Monitoring Setup:
-- Track Cohere API usage and costs
+- Track OpenAI API usage and costs
 - Monitor embedding generation latency  
 - Log retrieval accuracy metrics
 - Set up alerts for API rate limits
@@ -453,16 +452,16 @@ async def get_embedding(text, is_query=False):
 
 def main():
     """Main evaluation function."""
-    print("SAP iFlow Embedding Model Evaluation Framework (with Cohere)")
+    print("SAP iFlow Embedding Model Evaluation Framework (with OpenAI)")
     print("=" * 70)
     
-    print("Evaluation framework ready for Cohere integration.")
+    print("Evaluation framework ready for OpenAI integration.")
     print("Features:")
-    print("- Compare Cohere vs local embedding models")
+    print("- Compare OpenAI vs local embedding models")
     print("- Evaluate semantic clustering quality")
     print("- Analyze cost vs performance trade-offs")
     print("- Generate comprehensive comparison reports")
-    print("\nRun this after generating embeddings with both Cohere and local models.")
+    print("\nRun this after generating embeddings with both OpenAI and local models.")
 
 if __name__ == "__main__":
     main()
