@@ -183,9 +183,20 @@ class RetrievalBenchmarker:
                 
                 total_time = retrieval_time + reranking_time
                 
-                # Extract document IDs
-                retrieved_docs = [result.get('id', str(i)) for i, result in enumerate(search_results['results'])]
-                reranked_docs = [result.get('id', str(i)) for i, result in enumerate(reranked_results['results'])]
+                # Extract document IDs (handle nested 'document')
+                retrieved_docs = []
+                for i, result in enumerate(search_results['results']):
+                    if isinstance(result, dict) and 'document' in result and isinstance(result['document'], dict):
+                        retrieved_docs.append(result['document'].get('id', str(i)))
+                    else:
+                        retrieved_docs.append(result.get('id', str(i)))
+
+                reranked_docs = []
+                for i, result in enumerate(reranked_results['results']):
+                    if isinstance(result, dict) and 'document' in result and isinstance(result['document'], dict):
+                        reranked_docs.append(result['document'].get('id', str(i)))
+                    else:
+                        reranked_docs.append(result.get('id', str(i)))
                 
                 # Calculate metrics for different k values
                 query_metrics = {
