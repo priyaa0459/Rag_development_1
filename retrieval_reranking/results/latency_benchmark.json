@@ -1,0 +1,42 @@
+{
+  "retrieval_times": [
+    2.2127037048339844,
+    2.3632900714874268,
+    2.7247138023376465,
+    3.261352062225342,
+    3.293916940689087
+  ],
+  "reranking_times": [
+    24.19424533843994,
+    28.255903482437134,
+    28.3903591632843,
+    26.845198392868042,
+    25.498948335647583
+  ],
+  "total_times": [
+    26.406949043273926,
+    30.61919355392456,
+    31.11507296562195,
+    30.106550455093384,
+    28.79286527633667
+  ],
+  "component_times": {
+    "vector_search": [],
+    "cross_encoder": [],
+    "metadata_reranker": [],
+    "query_classifier": [],
+    "hybrid_reranker": []
+  },
+  "retrieval_times_avg": 2.771195316314697,
+  "retrieval_times_min": 2.2127037048339844,
+  "retrieval_times_max": 3.293916940689087,
+  "retrieval_times_std": 0.4458590880858728,
+  "reranking_times_avg": 26.6369309425354,
+  "reranking_times_min": 24.19424533843994,
+  "reranking_times_max": 28.3903591632843,
+  "reranking_times_std": 1.6124934303851894,
+  "total_times_avg": 29.408126258850096,
+  "total_times_min": 26.406949043273926,
+  "total_times_max": 31.11507296562195,
+  "total_times_std": 1.6884169015236288
+}

@@ -1,0 +1,348 @@
+{
+  "metrics": {
+    "precision_at_1": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recall_at_1": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ndcg_at_1": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precision_at_3": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recall_at_3": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ndcg_at_3": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precision_at_5": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recall_at_5": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ndcg_at_5": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precision_at_10": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "recall_at_10": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ndcg_at_10": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mrr": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "precision_at_1_avg": 0.0,
+    "precision_at_1_std": 0.0,
+    "recall_at_1_avg": 0.0,
+    "recall_at_1_std": 0.0,
+    "ndcg_at_1_avg": 0.0,
+    "ndcg_at_1_std": 0.0,
+    "precision_at_3_avg": 0.0,
+    "precision_at_3_std": 0.0,
+    "recall_at_3_avg": 0.0,
+    "recall_at_3_std": 0.0,
+    "ndcg_at_3_avg": 0.0,
+    "ndcg_at_3_std": 0.0,
+    "precision_at_5_avg": 0.0,
+    "precision_at_5_std": 0.0,
+    "recall_at_5_avg": 0.0,
+    "recall_at_5_std": 0.0,
+    "ndcg_at_5_avg": 0.0,
+    "ndcg_at_5_std": 0.0,
+    "precision_at_10_avg": 0.0,
+    "precision_at_10_std": 0.0,
+    "recall_at_10_avg": 0.0,
+    "recall_at_10_std": 0.0,
+    "ndcg_at_10_avg": 0.0,
+    "ndcg_at_10_std": 0.0,
+    "mrr_avg": 0.0,
+    "mrr_std": 0.0
+  },
+  "latency": {
+    "retrieval_times": [
+      3.023369789123535,
+      3.2501187324523926,
+      2.0485899448394775,
+      3.345167636871338,
+      2.4287185668945312
+    ],
+    "reranking_times": [
+      25.854820728302002,
+      26.93648362159729,
+      24.39310884475708,
+      25.220092058181763,
+      28.98316478729248
+    ],
+    "total_times": [
+      28.878190517425537,
+      30.186602354049683,
+      26.441698789596558,
+      28.5652596950531,
+      31.41188335418701
+    ],
+    "retrieval_times_avg": 2.8191929340362547,
+    "retrieval_times_std": 0.5000667591972316,
+    "retrieval_times_min": 2.0485899448394775,
+    "retrieval_times_max": 3.345167636871338,
+    "reranking_times_avg": 26.277534008026123,
+    "reranking_times_std": 1.587613346948582,
+    "reranking_times_min": 24.39310884475708,
+    "reranking_times_max": 28.98316478729248,
+    "total_times_avg": 29.09672694206238,
+    "total_times_std": 1.66896181623062,
+    "total_times_min": 26.441698789596558,
+    "total_times_max": 31.41188335418701
+  },
+  "per_query": [
+    {
+      "query": "How to create a webhook trigger for iFlow?",
+      "retrieval_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "reranking_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "latency": {
+        "retrieval_time": 3.023369789123535,
+        "reranking_time": 25.854820728302002,
+        "total_time": 28.878190517425537
+      }
+    },
+    {
+      "query": "Transform JSON data to XML format",
+      "retrieval_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "reranking_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "latency": {
+        "retrieval_time": 3.2501187324523926,
+        "reranking_time": 26.93648362159729,
+        "total_time": 30.186602354049683
+      }
+    },
+    {
+      "query": "Handle database connection errors",
+      "retrieval_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "reranking_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "latency": {
+        "retrieval_time": 2.0485899448394775,
+        "reranking_time": 24.39310884475708,
+        "total_time": 26.441698789596558
+      }
+    },
+    {
+      "query": "Map fields between different data schemas",
+      "retrieval_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "reranking_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "latency": {
+        "retrieval_time": 3.345167636871338,
+        "reranking_time": 25.220092058181763,
+        "total_time": 28.5652596950531
+      }
+    },
+    {
+      "query": "Aggregate data from multiple sources",
+      "retrieval_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "reranking_metrics": {
+        "precision_at_1": 0.0,
+        "recall_at_1": 0.0,
+        "ndcg_at_1": 0.0,
+        "precision_at_3": 0.0,
+        "recall_at_3": 0.0,
+        "ndcg_at_3": 0.0,
+        "precision_at_5": 0.0,
+        "recall_at_5": 0.0,
+        "ndcg_at_5": 0.0,
+        "precision_at_10": 0.0,
+        "recall_at_10": 0.0,
+        "ndcg_at_10": 0.0,
+        "mrr": 0.0
+      },
+      "latency": {
+        "retrieval_time": 2.4287185668945312,
+        "reranking_time": 28.98316478729248,
+        "total_time": 31.41188335418701
+      }
+    }
+  ]
+}
