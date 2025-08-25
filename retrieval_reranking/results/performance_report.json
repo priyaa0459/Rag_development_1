@@ -1,0 +1,2219 @@
+{
+  "system_benchmark": {
+    "metrics": {
+      "precision_at_1": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recall_at_1": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ndcg_at_1": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "precision_at_3": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recall_at_3": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ndcg_at_3": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "precision_at_5": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recall_at_5": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ndcg_at_5": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "precision_at_10": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "recall_at_10": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ndcg_at_10": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mrr": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "precision_at_1_avg": 0.0,
+      "precision_at_1_std": 0.0,
+      "recall_at_1_avg": 0.0,
+      "recall_at_1_std": 0.0,
+      "ndcg_at_1_avg": 0.0,
+      "ndcg_at_1_std": 0.0,
+      "precision_at_3_avg": 0.0,
+      "precision_at_3_std": 0.0,
+      "recall_at_3_avg": 0.0,
+      "recall_at_3_std": 0.0,
+      "ndcg_at_3_avg": 0.0,
+      "ndcg_at_3_std": 0.0,
+      "precision_at_5_avg": 0.0,
+      "precision_at_5_std": 0.0,
+      "recall_at_5_avg": 0.0,
+      "recall_at_5_std": 0.0,
+      "ndcg_at_5_avg": 0.0,
+      "ndcg_at_5_std": 0.0,
+      "precision_at_10_avg": 0.0,
+      "precision_at_10_std": 0.0,
+      "recall_at_10_avg": 0.0,
+      "recall_at_10_std": 0.0,
+      "ndcg_at_10_avg": 0.0,
+      "ndcg_at_10_std": 0.0,
+      "mrr_avg": 0.0,
+      "mrr_std": 0.0
+    },
+    "latency": {
+      "retrieval_times": [
+        3.023369789123535,
+        3.2501187324523926,
+        2.0485899448394775,
+        3.345167636871338,
+        2.4287185668945312
+      ],
+      "reranking_times": [
+        25.854820728302002,
+        26.93648362159729,
+        24.39310884475708,
+        25.220092058181763,
+        28.98316478729248
+      ],
+      "total_times": [
+        28.878190517425537,
+        30.186602354049683,
+        26.441698789596558,
+        28.5652596950531,
+        31.41188335418701
+      ],
+      "retrieval_times_avg": 2.8191929340362547,
+      "retrieval_times_std": 0.5000667591972316,
+      "retrieval_times_min": 2.0485899448394775,
+      "retrieval_times_max": 3.345167636871338,
+      "reranking_times_avg": 26.277534008026123,
+      "reranking_times_std": 1.587613346948582,
+      "reranking_times_min": 24.39310884475708,
+      "reranking_times_max": 28.98316478729248,
+      "total_times_avg": 29.09672694206238,
+      "total_times_std": 1.66896181623062,
+      "total_times_min": 26.441698789596558,
+      "total_times_max": 31.41188335418701
+    },
+    "per_query": [
+      {
+        "query": "How to create a webhook trigger for iFlow?",
+        "retrieval_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "reranking_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "latency": {
+          "retrieval_time": 3.023369789123535,
+          "reranking_time": 25.854820728302002,
+          "total_time": 28.878190517425537
+        }
+      },
+      {
+        "query": "Transform JSON data to XML format",
+        "retrieval_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "reranking_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "latency": {
+          "retrieval_time": 3.2501187324523926,
+          "reranking_time": 26.93648362159729,
+          "total_time": 30.186602354049683
+        }
+      },
+      {
+        "query": "Handle database connection errors",
+        "retrieval_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "reranking_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "latency": {
+          "retrieval_time": 2.0485899448394775,
+          "reranking_time": 24.39310884475708,
+          "total_time": 26.441698789596558
+        }
+      },
+      {
+        "query": "Map fields between different data schemas",
+        "retrieval_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "reranking_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "latency": {
+          "retrieval_time": 3.345167636871338,
+          "reranking_time": 25.220092058181763,
+          "total_time": 28.5652596950531
+        }
+      },
+      {
+        "query": "Aggregate data from multiple sources",
+        "retrieval_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "reranking_metrics": {
+          "precision_at_1": 0.0,
+          "recall_at_1": 0.0,
+          "ndcg_at_1": 0.0,
+          "precision_at_3": 0.0,
+          "recall_at_3": 0.0,
+          "ndcg_at_3": 0.0,
+          "precision_at_5": 0.0,
+          "recall_at_5": 0.0,
+          "ndcg_at_5": 0.0,
+          "precision_at_10": 0.0,
+          "recall_at_10": 0.0,
+          "ndcg_at_10": 0.0,
+          "mrr": 0.0
+        },
+        "latency": {
+          "retrieval_time": 2.4287185668945312,
+          "reranking_time": 28.98316478729248,
+          "total_time": 31.41188335418701
+        }
+      }
+    ]
+  },
+  "latency_benchmark": {
+    "retrieval_times": [
+      2.2127037048339844,
+      2.3632900714874268,
+      2.7247138023376465,
+      3.261352062225342,
+      3.293916940689087
+    ],
+    "reranking_times": [
+      24.19424533843994,
+      28.255903482437134,
+      28.3903591632843,
+      26.845198392868042,
+      25.498948335647583
+    ],
+    "total_times": [
+      26.406949043273926,
+      30.61919355392456,
+      31.11507296562195,
+      30.106550455093384,
+      28.79286527633667
+    ],
+    "component_times": {
+      "vector_search": [],
+      "cross_encoder": [],
+      "metadata_reranker": [],
+      "query_classifier": [],
+      "hybrid_reranker": []
+    },
+    "retrieval_times_avg": 2.771195316314697,
+    "retrieval_times_min": 2.2127037048339844,
+    "retrieval_times_max": 3.293916940689087,
+    "retrieval_times_std": 0.4458590880858728,
+    "reranking_times_avg": 26.6369309425354,
+    "reranking_times_min": 24.19424533843994,
+    "reranking_times_max": 28.3903591632843,
+    "reranking_times_std": 1.6124934303851894,
+    "total_times_avg": 29.408126258850096,
+    "total_times_min": 26.406949043273926,
+    "total_times_max": 31.11507296562195,
+    "total_times_std": 1.6884169015236288
+  },
+  "reranker_comparison": {
+    "configurations": [
+      {
+        "name": "Vector_Only",
+        "config": {
+          "enable_cross_encoder": false,
+          "enable_metadata_reranking": false,
+          "enable_query_classification": false,
+          "enable_hybrid_reranking": false
+        },
+        "results": {
+          "metrics": {
+            "precision_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mrr": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_1_avg": 0.0,
+            "precision_at_1_std": 0.0,
+            "recall_at_1_avg": 0.0,
+            "recall_at_1_std": 0.0,
+            "ndcg_at_1_avg": 0.0,
+            "ndcg_at_1_std": 0.0,
+            "precision_at_3_avg": 0.0,
+            "precision_at_3_std": 0.0,
+            "recall_at_3_avg": 0.0,
+            "recall_at_3_std": 0.0,
+            "ndcg_at_3_avg": 0.0,
+            "ndcg_at_3_std": 0.0,
+            "precision_at_5_avg": 0.0,
+            "precision_at_5_std": 0.0,
+            "recall_at_5_avg": 0.0,
+            "recall_at_5_std": 0.0,
+            "ndcg_at_5_avg": 0.0,
+            "ndcg_at_5_std": 0.0,
+            "precision_at_10_avg": 0.0,
+            "precision_at_10_std": 0.0,
+            "recall_at_10_avg": 0.0,
+            "recall_at_10_std": 0.0,
+            "ndcg_at_10_avg": 0.0,
+            "ndcg_at_10_std": 0.0,
+            "mrr_avg": 0.0,
+            "mrr_std": 0.0
+          },
+          "latency": {
+            "retrieval_times": [
+              3.1036524772644043,
+              2.538156509399414,
+              2.242302179336548,
+              2.4115004539489746,
+              3.631349563598633
+            ],
+            "reranking_times": [
+              28.340107440948486,
+              25.3998966217041,
+              27.983972549438477,
+              28.46464991569519,
+              30.172510385513306
+            ],
+            "total_times": [
+              31.44375991821289,
+              27.938053131103516,
+              30.226274728775024,
+              30.876150369644165,
+              33.80385994911194
+            ],
+            "retrieval_times_avg": 2.785392236709595,
+            "retrieval_times_std": 0.5124062373014638,
+            "retrieval_times_min": 2.242302179336548,
+            "retrieval_times_max": 3.631349563598633,
+            "reranking_times_avg": 28.07222738265991,
+            "reranking_times_std": 1.5353230587518047,
+            "reranking_times_min": 25.3998966217041,
+            "reranking_times_max": 30.172510385513306,
+            "total_times_avg": 30.85761961936951,
+            "total_times_std": 1.8945553974228528,
+            "total_times_min": 27.938053131103516,
+            "total_times_max": 33.80385994911194
+          },
+          "per_query": [
+            {
+              "query": "How to create a webhook trigger for iFlow?",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 3.1036524772644043,
+                "reranking_time": 28.340107440948486,
+                "total_time": 31.44375991821289
+              }
+            },
+            {
+              "query": "Transform JSON data to XML format",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.538156509399414,
+                "reranking_time": 25.3998966217041,
+                "total_time": 27.938053131103516
+              }
+            },
+            {
+              "query": "Handle database connection errors",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.242302179336548,
+                "reranking_time": 27.983972549438477,
+                "total_time": 30.226274728775024
+              }
+            },
+            {
+              "query": "Map fields between different data schemas",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.4115004539489746,
+                "reranking_time": 28.46464991569519,
+                "total_time": 30.876150369644165
+              }
+            },
+            {
+              "query": "Aggregate data from multiple sources",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 3.631349563598633,
+                "reranking_time": 30.172510385513306,
+                "total_time": 33.80385994911194
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Vector_CrossEncoder",
+        "config": {
+          "enable_cross_encoder": true,
+          "enable_metadata_reranking": false,
+          "enable_query_classification": false,
+          "enable_hybrid_reranking": false
+        },
+        "results": {
+          "metrics": {
+            "precision_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mrr": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_1_avg": 0.0,
+            "precision_at_1_std": 0.0,
+            "recall_at_1_avg": 0.0,
+            "recall_at_1_std": 0.0,
+            "ndcg_at_1_avg": 0.0,
+            "ndcg_at_1_std": 0.0,
+            "precision_at_3_avg": 0.0,
+            "precision_at_3_std": 0.0,
+            "recall_at_3_avg": 0.0,
+            "recall_at_3_std": 0.0,
+            "ndcg_at_3_avg": 0.0,
+            "ndcg_at_3_std": 0.0,
+            "precision_at_5_avg": 0.0,
+            "precision_at_5_std": 0.0,
+            "recall_at_5_avg": 0.0,
+            "recall_at_5_std": 0.0,
+            "ndcg_at_5_avg": 0.0,
+            "ndcg_at_5_std": 0.0,
+            "precision_at_10_avg": 0.0,
+            "precision_at_10_std": 0.0,
+            "recall_at_10_avg": 0.0,
+            "recall_at_10_std": 0.0,
+            "ndcg_at_10_avg": 0.0,
+            "ndcg_at_10_std": 0.0,
+            "mrr_avg": 0.0,
+            "mrr_std": 0.0
+          },
+          "latency": {
+            "retrieval_times": [
+              2.771087646484375,
+              2.543362617492676,
+              2.7572271823883057,
+              2.7604033946990967,
+              2.7766759395599365
+            ],
+            "reranking_times": [
+              25.091845273971558,
+              27.862836122512817,
+              29.421335697174072,
+              29.05123543739319,
+              29.393526792526245
+            ],
+            "total_times": [
+              27.862932920455933,
+              30.406198740005493,
+              32.17856287956238,
+              31.811638832092285,
+              32.17020273208618
+            ],
+            "retrieval_times_avg": 2.721751356124878,
+            "retrieval_times_std": 0.08947159975965027,
+            "retrieval_times_min": 2.543362617492676,
+            "retrieval_times_max": 2.7766759395599365,
+            "reranking_times_avg": 28.164155864715575,
+            "reranking_times_std": 1.6375988599524198,
+            "reranking_times_min": 25.091845273971558,
+            "reranking_times_max": 29.421335697174072,
+            "total_times_avg": 30.885907220840455,
+            "total_times_std": 1.6459554353428236,
+            "total_times_min": 27.862932920455933,
+            "total_times_max": 32.17856287956238
+          },
+          "per_query": [
+            {
+              "query": "How to create a webhook trigger for iFlow?",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.771087646484375,
+                "reranking_time": 25.091845273971558,
+                "total_time": 27.862932920455933
+              }
+            },
+            {
+              "query": "Transform JSON data to XML format",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.543362617492676,
+                "reranking_time": 27.862836122512817,
+                "total_time": 30.406198740005493
+              }
+            },
+            {
+              "query": "Handle database connection errors",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.7572271823883057,
+                "reranking_time": 29.421335697174072,
+                "total_time": 32.17856287956238
+              }
+            },
+            {
+              "query": "Map fields between different data schemas",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.7604033946990967,
+                "reranking_time": 29.05123543739319,
+                "total_time": 31.811638832092285
+              }
+            },
+            {
+              "query": "Aggregate data from multiple sources",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.7766759395599365,
+                "reranking_time": 29.393526792526245,
+                "total_time": 32.17020273208618
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Vector_Metadata",
+        "config": {
+          "enable_cross_encoder": false,
+          "enable_metadata_reranking": true,
+          "enable_query_classification": false,
+          "enable_hybrid_reranking": false
+        },
+        "results": {
+          "metrics": {
+            "precision_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mrr": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_1_avg": 0.0,
+            "precision_at_1_std": 0.0,
+            "recall_at_1_avg": 0.0,
+            "recall_at_1_std": 0.0,
+            "ndcg_at_1_avg": 0.0,
+            "ndcg_at_1_std": 0.0,
+            "precision_at_3_avg": 0.0,
+            "precision_at_3_std": 0.0,
+            "recall_at_3_avg": 0.0,
+            "recall_at_3_std": 0.0,
+            "ndcg_at_3_avg": 0.0,
+            "ndcg_at_3_std": 0.0,
+            "precision_at_5_avg": 0.0,
+            "precision_at_5_std": 0.0,
+            "recall_at_5_avg": 0.0,
+            "recall_at_5_std": 0.0,
+            "ndcg_at_5_avg": 0.0,
+            "ndcg_at_5_std": 0.0,
+            "precision_at_10_avg": 0.0,
+            "precision_at_10_std": 0.0,
+            "recall_at_10_avg": 0.0,
+            "recall_at_10_std": 0.0,
+            "ndcg_at_10_avg": 0.0,
+            "ndcg_at_10_std": 0.0,
+            "mrr_avg": 0.0,
+            "mrr_std": 0.0
+          },
+          "latency": {
+            "retrieval_times": [
+              2.61262583732605,
+              2.875572919845581,
+              2.6903586387634277,
+              2.425349712371826,
+              2.5604846477508545
+            ],
+            "reranking_times": [
+              27.385523319244385,
+              28.74579358100891,
+              24.39746618270874,
+              28.98154616355896,
+              26.83374261856079
+            ],
+            "total_times": [
+              29.998149156570435,
+              31.621366500854492,
+              27.087824821472168,
+              31.406895875930786,
+              29.394227266311646
+            ],
+            "retrieval_times_avg": 2.6328783512115477,
+            "retrieval_times_std": 0.1489454837580589,
+            "retrieval_times_min": 2.425349712371826,
+            "retrieval_times_max": 2.875572919845581,
+            "reranking_times_avg": 27.268814373016358,
+            "reranking_times_std": 1.6469648816422962,
+            "reranking_times_min": 24.39746618270874,
+            "reranking_times_max": 28.98154616355896,
+            "total_times_avg": 29.901692724227907,
+            "total_times_std": 1.6375342460169078,
+            "total_times_min": 27.087824821472168,
+            "total_times_max": 31.621366500854492
+          },
+          "per_query": [
+            {
+              "query": "How to create a webhook trigger for iFlow?",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.61262583732605,
+                "reranking_time": 27.385523319244385,
+                "total_time": 29.998149156570435
+              }
+            },
+            {
+              "query": "Transform JSON data to XML format",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.875572919845581,
+                "reranking_time": 28.74579358100891,
+                "total_time": 31.621366500854492
+              }
+            },
+            {
+              "query": "Handle database connection errors",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.6903586387634277,
+                "reranking_time": 24.39746618270874,
+                "total_time": 27.087824821472168
+              }
+            },
+            {
+              "query": "Map fields between different data schemas",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.425349712371826,
+                "reranking_time": 28.98154616355896,
+                "total_time": 31.406895875930786
+              }
+            },
+            {
+              "query": "Aggregate data from multiple sources",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.5604846477508545,
+                "reranking_time": 26.83374261856079,
+                "total_time": 29.394227266311646
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Vector_Classification",
+        "config": {
+          "enable_cross_encoder": false,
+          "enable_metadata_reranking": false,
+          "enable_query_classification": true,
+          "enable_hybrid_reranking": false
+        },
+        "results": {
+          "metrics": {
+            "precision_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mrr": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_1_avg": 0.0,
+            "precision_at_1_std": 0.0,
+            "recall_at_1_avg": 0.0,
+            "recall_at_1_std": 0.0,
+            "ndcg_at_1_avg": 0.0,
+            "ndcg_at_1_std": 0.0,
+            "precision_at_3_avg": 0.0,
+            "precision_at_3_std": 0.0,
+            "recall_at_3_avg": 0.0,
+            "recall_at_3_std": 0.0,
+            "ndcg_at_3_avg": 0.0,
+            "ndcg_at_3_std": 0.0,
+            "precision_at_5_avg": 0.0,
+            "precision_at_5_std": 0.0,
+            "recall_at_5_avg": 0.0,
+            "recall_at_5_std": 0.0,
+            "ndcg_at_5_avg": 0.0,
+            "ndcg_at_5_std": 0.0,
+            "precision_at_10_avg": 0.0,
+            "precision_at_10_std": 0.0,
+            "recall_at_10_avg": 0.0,
+            "recall_at_10_std": 0.0,
+            "ndcg_at_10_avg": 0.0,
+            "ndcg_at_10_std": 0.0,
+            "mrr_avg": 0.0,
+            "mrr_std": 0.0
+          },
+          "latency": {
+            "retrieval_times": [
+              3.4698469638824463,
+              2.4583239555358887,
+              3.286973237991333,
+              2.662529706954956,
+              4.192480087280273
+            ],
+            "reranking_times": [
+              27.86422371864319,
+              25.08092761039734,
+              26.004504203796387,
+              26.110273122787476,
+              30.420238494873047
+            ],
+            "total_times": [
+              31.334070682525635,
+              27.539251565933228,
+              29.29147744178772,
+              28.77280282974243,
+              34.61271858215332
+            ],
+            "retrieval_times_avg": 3.2140307903289793,
+            "retrieval_times_std": 0.6169881371862359,
+            "retrieval_times_min": 2.4583239555358887,
+            "retrieval_times_max": 4.192480087280273,
+            "reranking_times_avg": 27.09603343009949,
+            "reranking_times_std": 1.8901992769029528,
+            "reranking_times_min": 25.08092761039734,
+            "reranking_times_max": 30.420238494873047,
+            "total_times_avg": 30.310064220428465,
+            "total_times_std": 2.475460287143113,
+            "total_times_min": 27.539251565933228,
+            "total_times_max": 34.61271858215332
+          },
+          "per_query": [
+            {
+              "query": "How to create a webhook trigger for iFlow?",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 3.4698469638824463,
+                "reranking_time": 27.86422371864319,
+                "total_time": 31.334070682525635
+              }
+            },
+            {
+              "query": "Transform JSON data to XML format",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.4583239555358887,
+                "reranking_time": 25.08092761039734,
+                "total_time": 27.539251565933228
+              }
+            },
+            {
+              "query": "Handle database connection errors",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 3.286973237991333,
+                "reranking_time": 26.004504203796387,
+                "total_time": 29.29147744178772
+              }
+            },
+            {
+              "query": "Map fields between different data schemas",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.662529706954956,
+                "reranking_time": 26.110273122787476,
+                "total_time": 28.77280282974243
+              }
+            },
+            {
+              "query": "Aggregate data from multiple sources",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 4.192480087280273,
+                "reranking_time": 30.420238494873047,
+                "total_time": 34.61271858215332
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Full_Hybrid",
+        "config": {
+          "enable_cross_encoder": true,
+          "enable_metadata_reranking": true,
+          "enable_query_classification": true,
+          "enable_hybrid_reranking": true
+        },
+        "results": {
+          "metrics": {
+            "precision_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_1": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_3": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_5": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "recall_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "ndcg_at_10": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "mrr": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "precision_at_1_avg": 0.0,
+            "precision_at_1_std": 0.0,
+            "recall_at_1_avg": 0.0,
+            "recall_at_1_std": 0.0,
+            "ndcg_at_1_avg": 0.0,
+            "ndcg_at_1_std": 0.0,
+            "precision_at_3_avg": 0.0,
+            "precision_at_3_std": 0.0,
+            "recall_at_3_avg": 0.0,
+            "recall_at_3_std": 0.0,
+            "ndcg_at_3_avg": 0.0,
+            "ndcg_at_3_std": 0.0,
+            "precision_at_5_avg": 0.0,
+            "precision_at_5_std": 0.0,
+            "recall_at_5_avg": 0.0,
+            "recall_at_5_std": 0.0,
+            "ndcg_at_5_avg": 0.0,
+            "ndcg_at_5_std": 0.0,
+            "precision_at_10_avg": 0.0,
+            "precision_at_10_std": 0.0,
+            "recall_at_10_avg": 0.0,
+            "recall_at_10_std": 0.0,
+            "ndcg_at_10_avg": 0.0,
+            "ndcg_at_10_std": 0.0,
+            "mrr_avg": 0.0,
+            "mrr_std": 0.0
+          },
+          "latency": {
+            "retrieval_times": [
+              2.2698516845703125,
+              2.8169946670532227,
+              2.459120512008667,
+              2.1078600883483887,
+              2.977295398712158
+            ],
+            "reranking_times": [
+              26.824146032333374,
+              28.50933003425598,
+              25.814815521240234,
+              26.340839385986328,
+              27.132962226867676
+            ],
+            "total_times": [
+              29.093997716903687,
+              31.326324701309204,
+              28.2739360332489,
+              28.448699474334717,
+              30.110257625579834
+            ],
+            "retrieval_times_avg": 2.52622447013855,
+            "retrieval_times_std": 0.3265795438619612,
+            "retrieval_times_min": 2.1078600883483887,
+            "retrieval_times_max": 2.977295398712158,
+            "reranking_times_avg": 26.924418640136718,
+            "reranking_times_std": 0.9096453130743755,
+            "reranking_times_min": 25.814815521240234,
+            "reranking_times_max": 28.50933003425598,
+            "total_times_avg": 29.45064311027527,
+            "total_times_std": 1.1374532316612365,
+            "total_times_min": 28.2739360332489,
+            "total_times_max": 31.326324701309204
+          },
+          "per_query": [
+            {
+              "query": "How to create a webhook trigger for iFlow?",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.2698516845703125,
+                "reranking_time": 26.824146032333374,
+                "total_time": 29.093997716903687
+              }
+            },
+            {
+              "query": "Transform JSON data to XML format",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.8169946670532227,
+                "reranking_time": 28.50933003425598,
+                "total_time": 31.326324701309204
+              }
+            },
+            {
+              "query": "Handle database connection errors",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.459120512008667,
+                "reranking_time": 25.814815521240234,
+                "total_time": 28.2739360332489
+              }
+            },
+            {
+              "query": "Map fields between different data schemas",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.1078600883483887,
+                "reranking_time": 26.340839385986328,
+                "total_time": 28.448699474334717
+              }
+            },
+            {
+              "query": "Aggregate data from multiple sources",
+              "retrieval_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "reranking_metrics": {
+                "precision_at_1": 0.0,
+                "recall_at_1": 0.0,
+                "ndcg_at_1": 0.0,
+                "precision_at_3": 0.0,
+                "recall_at_3": 0.0,
+                "ndcg_at_3": 0.0,
+                "precision_at_5": 0.0,
+                "recall_at_5": 0.0,
+                "ndcg_at_5": 0.0,
+                "precision_at_10": 0.0,
+                "recall_at_10": 0.0,
+                "ndcg_at_10": 0.0,
+                "mrr": 0.0
+              },
+              "latency": {
+                "retrieval_time": 2.977295398712158,
+                "reranking_time": 27.132962226867676,
+                "total_time": 30.110257625579834
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "overall_metrics": {
+      "Vector_Only": {
+        "precision_at_5_avg": 0.0,
+        "recall_at_5_avg": 0.0,
+        "mrr_avg": 0.0,
+        "avg_total_time": 30.85761961936951
+      },
+      "Vector_CrossEncoder": {
+        "precision_at_5_avg": 0.0,
+        "recall_at_5_avg": 0.0,
+        "mrr_avg": 0.0,
+        "avg_total_time": 30.885907220840455
+      },
+      "Vector_Metadata": {
+        "precision_at_5_avg": 0.0,
+        "recall_at_5_avg": 0.0,
+        "mrr_avg": 0.0,
+        "avg_total_time": 29.901692724227907
+      },
+      "Vector_Classification": {
+        "precision_at_5_avg": 0.0,
+        "recall_at_5_avg": 0.0,
+        "mrr_avg": 0.0,
+        "avg_total_time": 30.310064220428465
+      },
+      "Full_Hybrid": {
+        "precision_at_5_avg": 0.0,
+        "recall_at_5_avg": 0.0,
+        "mrr_avg": 0.0,
+        "avg_total_time": 29.45064311027527
+      }
+    }
+  },
+  "summary": {
+    "total_documents": 15,
+    "total_queries": 5,
+    "best_reranker": "Vector_Only",
+    "fastest_reranker": "Full_Hybrid"
+  }
+}

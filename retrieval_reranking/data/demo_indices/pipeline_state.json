@@ -1,0 +1,22 @@
+{
+  "config": {
+    "vector_search": {
+      "model_name": "text-embedding-ada-002",
+      "dimension": 1536
+    },
+    "cross_encoder": {
+      "model_name": "gpt-3.5-turbo",
+      "max_length": 512
+    },
+    "query_classifier": {
+      "model_name": "gpt-3.5-turbo",
+      "classifier_type": "openai"
+    }
+  },
+  "pipeline_settings": {
+    "enable_cross_encoder": true,
+    "enable_metadata_reranking": true,
+    "enable_query_classification": true,
+    "enable_hybrid_reranking": true
+  }
+}
