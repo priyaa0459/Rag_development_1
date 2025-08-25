@@ -182,10 +182,10 @@ class RetrievalPipeline:
                 # Add score breakdown for first result
                 first_result = search_results[0]
                 response['score_breakdown'] = {
-                    'vector_score': first_result.get('similarity_score', 0.0),
+                    'vector_score': first_result.get('similarity_score') or first_result.get('vector_score', 0.0),
                     'cross_encoder_score': first_result.get('cross_encoder_score', 0.0),
                     'metadata_score': first_result.get('metadata_score', 0.0),
-                    'final_score': first_result.get('final_score', 0.0)
+                    'final_score': first_result.get('final_score') or first_result.get('hybrid_score') or first_result.get('score', 0.0)
                 }
             
             return response

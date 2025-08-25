@@ -251,14 +251,30 @@ def print_search_results(results: Dict[str, Any], query: str) -> None:
     print("-" * 80)
     
     for i, result in enumerate(results['results'][:5], 1):
-        print(f"{i}. {result.get('id', 'Unknown')}")
-        print(f"   Text: {result.get('text', '')[:100]}...")
-        print(f"   Similarity Score: {result.get('similarity_score', 0.0):.3f}")
-        print(f"   Cross-Encoder Score: {result.get('cross_encoder_score', 0.0):.3f}")
-        print(f"   Metadata Score: {result.get('metadata_score', 0.0):.3f}")
-        print(f"   Final Score: {result.get('final_score', 0.0):.3f}")
+        doc = result.get('document', {}) if isinstance(result, dict) else {}
+        doc_id = doc.get('id') or result.get('id', 'Unknown')
+        # Try common text fields on the nested document, fall back to top-level
+        text = (
+            doc.get('text')
+            or doc.get('content')
+            or doc.get('body')
+            or doc.get('description')
+            or doc.get('title')
+            or result.get('text', '')
+        )
+        similarity = result.get('similarity_score') or result.get('vector_score') or result.get('combined_score', 0.0)
+        cross_enc = result.get('cross_encoder_score', 0.0)
+        metadata_score = result.get('metadata_score', 0.0)
+        final_score = result.get('final_score') or result.get('hybrid_score') or result.get('score', 0.0)
+
+        print(f"{i}. {doc_id}")
+        print(f"   Text: {str(text)[:100]}...")
+        print(f"   Similarity Score: {float(similarity):.3f}")
+        print(f"   Cross-Encoder Score: {float(cross_enc):.3f}")
+        print(f"   Metadata Score: {float(metadata_score):.3f}")
+        print(f"   Final Score: {float(final_score):.3f}")
         
-        metadata = result.get('metadata', {})
+        metadata = doc.get('metadata', {}) if isinstance(doc, dict) else {}
         if metadata:
             print(f"   Component Type: {metadata.get('component_type', 'Unknown')}")
             print(f"   Complexity: {metadata.get('complexity', 0.0):.2f}")
