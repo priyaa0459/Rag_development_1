@@ -1,6 +1,5 @@
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
-import openai
 
 from utils.logging_utils import get_logger
 
@@ -284,74 +283,24 @@ def rank_documents(documents: List[Dict[str, Any]], scores: List[float], max_res
     return doc_score_pairs
 
 
-def calculate_openai_similarity(text1: str, text2: str, model: str = "gpt-3.5-turbo") -> float:
+def calculate_openai_similarity(text1: str, text2: str, model: str = "local") -> float:
     """
-    Calculate semantic similarity between two texts using OpenAI.
-    
-    Args:
-        text1: First text
-        text2: Second text
-        model: OpenAI model to use
-        
-    Returns:
-        Similarity score between 0 and 1
+    Local semantic similarity proxy (no external APIs). Uses token overlap Jaccard.
     """
-    try:
-        client = openai.OpenAI()
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": "You are a semantic similarity analyzer. Rate the similarity between two texts on a scale from 0 to 1, where 0 means completely different and 1 means identical meaning. Consider semantic meaning, not just word overlap. Return only the numeric score."},
-                {"role": "user", "content": f"Rate the similarity between:\nText 1: {text1}\nText 2: {text2}"}
-            ],
-            max_tokens=10,
-            temperature=0.1
-        )
-        score = float(response.choices[0].message.content.strip())
-        return max(0.0, min(1.0, score))  # Clamp between 0 and 1
-    except Exception as e:
-        logger.warning(f"OpenAI similarity calculation failed: {e}")
-        # Fallback: simple word overlap
-        words1 = set(text1.lower().split())
-        words2 = set(text2.lower().split())
-        if not words1 or not words2:
-            return 0.0
-        intersection = words1.intersection(words2)
-        union = words1.union(words2)
-        return len(intersection) / len(union)
+    words1 = set(text1.lower().split())
+    words2 = set(text2.lower().split())
+    if not words1 or not words2:
+        return 0.0
+    intersection = words1.intersection(words2)
+    union = words1.union(words2)
+    return len(intersection) / len(union)
 
 
-def calculate_openai_relevance_score(query: str, document_text: str, model: str = "gpt-3.5-turbo") -> float:
-    """
-    Calculate relevance score between query and document using OpenAI.
-    
-    Args:
-        query: Search query
-        document_text: Document text
-        model: OpenAI model to use
-        
-    Returns:
-        Relevance score between 0 and 1
-    """
-    try:
-        client = openai.OpenAI()
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": "You are a document relevance analyzer. Rate how relevant a document is to a query on a scale from 0 to 1, where 0 means completely irrelevant and 1 means perfectly relevant. Consider semantic meaning and context. Return only the numeric score."},
-                {"role": "user", "content": f"Rate the relevance of this document to the query:\nQuery: {query}\nDocument: {document_text[:500]}..."}
-            ],
-            max_tokens=10,
-            temperature=0.1
-        )
-        score = float(response.choices[0].message.content.strip())
-        return max(0.0, min(1.0, score))  # Clamp between 0 and 1
-    except Exception as e:
-        logger.warning(f"OpenAI relevance calculation failed: {e}")
-        # Fallback: simple keyword matching
-        query_words = set(query.lower().split())
-        doc_words = set(document_text.lower().split())
-        if not query_words:
-            return 0.0
-        matches = sum(1 for word in query_words if word in doc_words)
-        return matches / len(query_words)
+def calculate_openai_relevance_score(query: str, document_text: str, model: str = "local") -> float:
+    """Local relevance proxy via keyword overlap fraction."""
+    query_words = set(query.lower().split())
+    doc_words = set(document_text.lower().split())
+    if not query_words:
+        return 0.0
+    matches = sum(1 for word in query_words if word in doc_words)
+    return matches / len(query_words)

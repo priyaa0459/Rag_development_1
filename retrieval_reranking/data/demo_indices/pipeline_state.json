@@ -1,20 +1,22 @@
 {
   "config": {
     "vector_search": {
-      "model_name": "text-embedding-ada-002",
-      "dimension": 1536
+      "model_name": "microsoft/codebert-base",
+      "dimension": 768,
+      "backend": "hf",
+      "device": null
     },
     "cross_encoder": {
-      "model_name": "gpt-3.5-turbo",
+      "model_name": "cross-encoder/ms-marco-MiniLM-L-6-v2",
       "max_length": 512
     },
     "query_classifier": {
-      "model_name": "gpt-3.5-turbo",
-      "classifier_type": "openai"
+      "model_name": "rule_based",
+      "classifier_type": "rule_based"
     }
   },
   "pipeline_settings": {
-    "enable_cross_encoder": true,
+    "enable_cross_encoder": false,
     "enable_metadata_reranking": true,
     "enable_query_classification": true,
     "enable_hybrid_reranking": true

@@ -1,6 +1,5 @@
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
-import openai
 import faiss
 import pickle
 import os
@@ -8,6 +7,20 @@ from pathlib import Path
 
 from utils.logging_utils import get_logger, RetrievalLogger
 from utils.query_utils import normalize_query
+
+# Optional imports: OpenAI and HF transformers
+try:
+    import openai  # type: ignore
+except Exception:  # pragma: no cover
+    openai = None  # type: ignore
+
+try:
+    import torch  # type: ignore
+    from transformers import AutoTokenizer, AutoModel  # type: ignore
+except Exception:  # pragma: no cover
+    torch = None  # type: ignore
+    AutoTokenizer = None  # type: ignore
+    AutoModel = None  # type: ignore
 
 logger = get_logger(__name__)
 
@@ -17,25 +30,55 @@ class VectorSearch:
     Vector search system using OpenAI embeddings and FAISS for efficient similarity search.
     """
     
-    def __init__(self, openai_client: Optional[openai.OpenAI] = None, model_name: str = 'text-embedding-ada-002', index_path: Optional[str] = None, documents_path: Optional[str] = None, dimension: int = 1536):
+    def __init__(self, openai_client: Optional[Any] = None, model_name: str = 'microsoft/codebert-base', index_path: Optional[str] = None, documents_path: Optional[str] = None, dimension: Optional[int] = None, backend: str = 'hf', device: Optional[str] = None):
         """
         Initialize the vector search system.
         
         Args:
-            openai_client: OpenAI client instance
-            model_name: OpenAI embedding model name
+            openai_client: OpenAI client instance (only if backend=='openai')
+            model_name: Embedding model name ('microsoft/codebert-base' by default)
             index_path: Path to save/load FAISS index
             documents_path: Path to save/load document metadata
-            dimension: Embedding dimension
+            dimension: Embedding dimension (auto-detected for HF if None)
+            backend: 'hf' for HuggingFace models, 'openai' for OpenAI embeddings
+            device: Computation device for HF models ('cuda'|'cpu'|None)
         """
-        self.client = openai_client or openai.OpenAI()
+        self.backend = backend
         self.model_name = model_name
-        self.dimension = dimension
+        self.device = device or ("cuda" if (torch is not None and torch.cuda.is_available()) else "cpu")
+        self.dimension = dimension if dimension is not None else 768
         self.index_path = index_path
         self.documents_path = documents_path
         
-        # Initialize FAISS index
-        self.index = faiss.IndexFlatIP(dimension)  # Inner product for cosine similarity
+        # Initialize embedding providers
+        self.client = None
+        self.tokenizer = None
+        self.model = None
+        if self.backend == 'openai':
+            if openai is None:
+                raise ImportError("openai package not available; install it or use backend='hf'")
+            self.client = openai_client or openai.OpenAI()
+            # default OpenAI embedding dimension if not provided
+            if dimension is None:
+                self.dimension = 1536
+        else:
+            if AutoTokenizer is None or AutoModel is None:
+                raise ImportError("transformers/torch not available; install them or use backend='openai'")
+            # Load HF model/tokenizer lazily here
+            self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            self.model = AutoModel.from_pretrained(self.model_name)
+            self.model.to(self.device)
+            self.model.eval()
+            # Infer hidden size if not provided
+            try:
+                hidden_size = getattr(self.model.config, 'hidden_size', None)
+                if hidden_size and dimension is None:
+                    self.dimension = int(hidden_size)
+            except Exception:
+                pass
+
+        # Initialize FAISS index with resolved dimension
+        self.index = faiss.IndexFlatIP(self.dimension)  # Inner product for cosine similarity
         self.documents = []
         self.document_embeddings = []
         
@@ -43,7 +86,7 @@ class VectorSearch:
         if index_path and os.path.exists(index_path):
             self.load_index(index_path, documents_path)
         
-        logger.info(f"Vector search initialized with model: {model_name}")
+        logger.info(f"Vector search initialized with model: {model_name} (backend={self.backend}, dim={self.dimension}, device={self.device})")
     
     def add_documents(self, documents: List[Dict[str, Any]]) -> None:
         """
@@ -79,11 +122,35 @@ class VectorSearch:
             Embedding vector
         """
         try:
-            response = self.client.embeddings.create(
-                model=self.model_name,
-                input=text
-            )
-            return np.array(response.data[0].embedding, dtype=np.float32)
+            if self.backend == 'openai':
+                if self.client is None:
+                    logger.error("OpenAI client not initialized")
+                    return None
+                response = self.client.embeddings.create(
+                    model=self.model_name,
+                    input=text
+                )
+                return np.array(response.data[0].embedding, dtype=np.float32)
+            # HF backend: use CLS embedding from last hidden state
+            if self.tokenizer is None or self.model is None or torch is None:
+                logger.error("HF model/tokenizer not initialized")
+                return None
+            with torch.no_grad():
+                encoded = self.tokenizer(text, truncation=True, max_length=512, padding=False, return_tensors='pt')
+                encoded = {k: v.to(self.device) for k, v in encoded.items()}
+                outputs = self.model(**encoded)
+                token_embeddings = outputs.last_hidden_state  # [1, seq_len, hidden]
+                cls_embedding = token_embeddings[:, 0, :]  # [1, hidden]
+                vec = cls_embedding.squeeze(0).detach().cpu().numpy().astype(np.float32)
+                if vec.ndim != 1:
+                    vec = vec.reshape(-1)
+                # Enforce expected dimension by trimming/padding if necessary
+                if vec.shape[0] > self.dimension:
+                    vec = vec[:self.dimension]
+                elif vec.shape[0] < self.dimension:
+                    pad = np.zeros((self.dimension - vec.shape[0],), dtype=np.float32)
+                    vec = np.concatenate([vec, pad], axis=0)
+                return vec
         except Exception as e:
             logger.error(f"Failed to get embedding: {e}")
             return None
@@ -93,8 +160,15 @@ class VectorSearch:
         if not self.document_embeddings:
             return
         
+        # Filter embeddings that match expected dimension
+        filtered_embeddings = [emb for emb in self.document_embeddings if isinstance(emb, np.ndarray) and emb.shape[0] == self.dimension]
+        if len(filtered_embeddings) != len(self.document_embeddings):
+            logger.warning(f"Filtered {len(self.document_embeddings) - len(filtered_embeddings)} embeddings with unexpected shape")
+        if not filtered_embeddings:
+            logger.warning("No valid embeddings to index")
+            return
         # Convert to numpy array
-        embeddings_array = np.array(self.document_embeddings, dtype=np.float32)
+        embeddings_array = np.stack(filtered_embeddings).astype(np.float32)
         
         # Normalize embeddings for cosine similarity
         faiss.normalize_L2(embeddings_array)
