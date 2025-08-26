@@ -3,7 +3,10 @@ import json
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
 from collections import Counter
-import openai
+try:
+    import openai  # type: ignore
+except Exception:  # pragma: no cover
+    openai = None  # type: ignore
 import pickle
 import os
 
@@ -32,7 +35,9 @@ class EnhancedQueryClassifier:
             confidence_threshold: Minimum confidence threshold
             enable_cache: Whether to enable caching
         """
-        self.client = openai_client or openai.OpenAI()
+        self.client = None
+        if openai_client is not None and openai is not None:
+            self.client = openai_client
         self.model_path = model_path
         self.classification_strategy = classification_strategy
         self.confidence_threshold = confidence_threshold

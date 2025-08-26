@@ -1,6 +1,5 @@
 import torch
 from typing import List, Dict, Any, Optional, Tuple
-import openai
 import numpy as np
 
 from utils.logging_utils import get_logger, RetrievalLogger
@@ -14,7 +13,7 @@ class CrossEncoderReranker:
     Cross-encoder reranker using OpenAI for improved ranking.
     """
     
-    def __init__(self, openai_client: Optional[openai.OpenAI] = None, model_name: str = 'gpt-3.5-turbo', max_length: int = 512, device: Optional[str] = None, batch_size: int = 32):
+    def __init__(self, openai_client: Optional[Any] = None, model_name: str = 'disabled', max_length: int = 512, device: Optional[str] = None, batch_size: int = 32):
         """
         Initialize the cross-encoder reranker.
         
@@ -25,7 +24,7 @@ class CrossEncoderReranker:
             device: Device for computation (not used with OpenAI)
             batch_size: Batch size for processing
         """
-        self.client = openai_client or openai.OpenAI()
+        self.client = None
         self.model_name = model_name
         self.max_length = max_length
         self.batch_size = batch_size
@@ -53,7 +52,7 @@ class CrossEncoderReranker:
             # Prepare query-document pairs
             pairs = self._prepare_pairs(query, documents)
             
-            # Get scores from cross-encoder
+            # Cross-encoder disabled in CodeBERT-only mode; use zeros
             scores = self._get_scores(pairs)
             
             # Normalize scores if requested
@@ -145,15 +144,8 @@ class CrossEncoderReranker:
         Returns:
             List of relevance scores
         """
-        scores = []
-        
-        # Process in batches
-        for i in range(0, len(pairs), self.batch_size):
-            batch_pairs = pairs[i:i + self.batch_size]
-            batch_scores = self._get_batch_scores(batch_pairs)
-            scores.extend(batch_scores)
-        
-        return scores
+        # Disabled: return zeros for each pair
+        return [0.0 for _ in pairs]
     
     def _get_batch_scores(self, pairs: List[Tuple[str, str]]) -> List[float]:
         """
@@ -165,34 +157,8 @@ class CrossEncoderReranker:
         Returns:
             List of relevance scores
         """
-        scores = []
-        
-        for query, doc_text in pairs:
-            try:
-                # Truncate document text if too long
-                if len(doc_text) > self.max_length:
-                    doc_text = doc_text[:self.max_length] + "..."
-                
-                response = self.client.chat.completions.create(
-                    model=self.model_name,
-                    messages=[
-                        {"role": "system", "content": "You are a document relevance scorer. Rate how relevant a document is to a query on a scale from 0 to 1, where 0 means completely irrelevant and 1 means perfectly relevant. Consider semantic meaning, context, and information overlap. Return only the numeric score."},
-                        {"role": "user", "content": f"Rate the relevance of this document to the query:\nQuery: {query}\nDocument: {doc_text}"}
-                    ],
-                    max_tokens=10,
-                    temperature=0.1
-                )
-                
-                score_text = response.choices[0].message.content.strip()
-                score = float(score_text)
-                score = max(0.0, min(1.0, score))  # Clamp between 0 and 1
-                scores.append(score)
-                
-            except Exception as e:
-                logger.warning(f"Failed to get score for pair: {e}")
-                scores.append(0.0)  # Default score
-        
-        return scores
+        # Disabled: return zeros for each pair in batch
+        return [0.0 for _ in pairs]
     
     def get_document_score(self, query: str, document: Dict[str, Any]) -> float:
         """

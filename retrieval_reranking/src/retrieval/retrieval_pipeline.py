@@ -35,16 +35,18 @@ class RetrievalPipeline:
         # Default configuration
         self.default_config = {
             'vector_search': {
-                'model_name': 'text-embedding-ada-002',
-                'dimension': 1536
+                'model_name': 'microsoft/codebert-base',
+                'dimension': 768,
+                'backend': 'hf',
+                'device': None
             },
             'cross_encoder': {
-                'model_name': 'gpt-3.5-turbo',
+                'model_name': 'cross-encoder/ms-marco-MiniLM-L-6-v2',
                 'max_length': 512
             },
             'query_classifier': {
-                'model_name': 'gpt-3.5-turbo',
-                'classifier_type': 'openai'
+                'model_name': 'rule_based',
+                'classifier_type': 'rule_based'
             }
         }
         
@@ -53,7 +55,8 @@ class RetrievalPipeline:
         
         # Pipeline settings
         self.index_path = index_path or "./data"
-        self.enable_cross_encoder = enable_cross_encoder
+        # By default for this task we disable OpenAI cross-encoder; can be re-enabled via config
+        self.enable_cross_encoder = enable_cross_encoder and False
         self.enable_metadata_reranking = enable_metadata_reranking
         self.enable_query_classification = enable_query_classification
         self.enable_hybrid_reranking = enable_hybrid_reranking
@@ -84,10 +87,12 @@ class RetrievalPipeline:
             # Initialize vector search
             vector_config = self.config['vector_search']
             self.vector_search = VectorSearch(
-                model_name=vector_config['model_name'],
+                model_name=vector_config.get('model_name', 'microsoft/codebert-base'),
                 index_path=f"{self.index_path}/faiss_index",
                 documents_path=f"{self.index_path}/documents.pkl",
-                dimension=vector_config['dimension']
+                dimension=vector_config.get('dimension'),
+                backend=vector_config.get('backend', 'hf'),
+                device=vector_config.get('device')
             )
             
             # Initialize rerankers

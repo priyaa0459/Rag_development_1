@@ -3,9 +3,14 @@ import json
 from typing import List, Dict, Any, Optional, Tuple
 from collections import Counter
 import numpy as np
-import openai
 import pickle
 import os
+
+# Make OpenAI import optional to support non-OpenAI modes
+try:
+    import openai  # type: ignore
+except Exception:  # pragma: no cover
+    openai = None  # type: ignore
 
 from utils.logging_utils import get_logger, RetrievalLogger
 from utils.query_utils import normalize_query, extract_query_intent
@@ -18,7 +23,7 @@ class QueryClassifier:
     Query classifier for iFlow component types using OpenAI.
     """
     
-    def __init__(self, openai_client: Optional[openai.OpenAI] = None, model_path: Optional[str] = None, classifier_type: str = 'openai', confidence_threshold: float = 0.5):
+    def __init__(self, openai_client: Optional[Any] = None, model_path: Optional[str] = None, classifier_type: str = 'openai', confidence_threshold: float = 0.5):
         """
         Initialize the query classifier.
         
@@ -28,7 +33,12 @@ class QueryClassifier:
             classifier_type: Type of classifier ('openai' or 'rule_based')
             confidence_threshold: Minimum confidence threshold
         """
-        self.client = openai_client or openai.OpenAI()
+        # Initialize client only when needed for OpenAI mode
+        self.client = None
+        if classifier_type == 'openai':
+            if openai is None:
+                raise ImportError("openai package not available; install it or set classifier_type='rule_based'")
+            self.client = openai_client or openai.OpenAI()
         self.model_path = model_path
         self.classifier_type = classifier_type
         self.confidence_threshold = confidence_threshold
