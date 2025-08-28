@@ -23,7 +23,7 @@ class QueryClassifier:
     Query classifier for iFlow component types using OpenAI.
     """
     
-    def __init__(self, openai_client: Optional[Any] = None, model_path: Optional[str] = None, classifier_type: str = 'openai', confidence_threshold: float = 0.5):
+    def __init__(self, openai_client: Optional[Any] = None, model_path: Optional[str] = None, classifier_type: str = 'openai', confidence_threshold: float = 0.2):
         """
         Initialize the query classifier.
         
@@ -43,47 +43,39 @@ class QueryClassifier:
         self.classifier_type = classifier_type
         self.confidence_threshold = confidence_threshold
         
-        # iFlow component patterns for rule-based classification
+        # Enhanced iFlow component patterns for rule-based classification
         self.iflow_patterns = {
             'trigger': [
-                r'\b(trigger|start|initiate|begin|launch|activate|when|if|on)\b',
-                r'\b(webhook|api|event|notification|schedule|timer|cron)\b',
-                r'\b(monitor|watch|listen|detect|observe)\b'
+                r'\b(trigger|start|initiate|begin|launch|activate|when|if|on|webhook|api|event|notification|schedule|timer|cron|monitor|watch|listen|detect|observe)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'action': [
-                r'\b(action|perform|execute|run|do|send|create|update|delete)\b',
-                r'\b(http|request|api|call|post|get|put|delete)\b',
-                r'\b(transform|process|handle|manage|control)\b'
+                r'\b(action|perform|execute|run|do|send|create|update|delete|http|request|api|call|post|get|put|delete|transform|process|handle|manage|control)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'condition': [
-                r'\b(condition|if|else|switch|case|when|check|validate|test)\b',
-                r'\b(compare|match|filter|select|choose|decide)\b',
-                r'\b(logic|rule|criteria|threshold|limit)\b'
+                r'\b(condition|if|else|switch|case|when|check|validate|test|compare|match|filter|select|choose|decide|logic|rule|criteria|threshold|limit)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'transformer': [
-                r'\b(transform|convert|map|format|parse|encode|decode)\b',
-                r'\b(json|xml|csv|data|structure|schema)\b',
-                r'\b(modify|change|update|replace|extract)\b'
+                r'\b(transform|convert|map|format|parse|encode|decode|json|xml|csv|data|structure|schema|modify|change|update|replace|extract)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'connector': [
-                r'\b(connect|link|join|bridge|route|forward|redirect)\b',
-                r'\b(integration|sync|transfer|move|copy|share)\b',
-                r'\b(api|service|database|file|storage)\b'
+                r'\b(connect|link|join|bridge|route|forward|redirect|integration|sync|transfer|move|copy|share|api|service|database|file|storage)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'error_handler': [
-                r'\b(error|exception|failure|retry|fallback|recovery)\b',
-                r'\b(handle|catch|manage|resolve|fix|repair)\b',
-                r'\b(log|alert|notify|report|monitor)\b'
+                r'\b(error|exception|failure|retry|fallback|recovery|handle|catch|manage|resolve|fix|repair|log|alert|notify|report|monitor)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'data_mapper': [
-                r'\b(map|mapping|field|column|property|attribute)\b',
-                r'\b(data|record|object|entity|model|schema)\b',
-                r'\b(extract|insert|update|delete|query)\b'
+                r'\b(map|mapping|field|column|property|attribute|data|record|object|entity|model|schema|extract|insert|update|delete|query)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ],
             'aggregator': [
-                r'\b(aggregate|sum|count|average|group|collect|merge)\b',
-                r'\b(batch|bulk|batch|accumulate|combine|consolidate)\b',
-                r'\b(report|summary|statistics|analytics|metrics)\b'
+                r'\b(aggregate|sum|count|average|group|collect|merge|batch|bulk|accumulate|combine|consolidate|report|summary|statistics|analytics|metrics)\b',
+                r'\b(how to|create|set up|configure|implement)\b'
             ]
         }
         
@@ -175,15 +167,24 @@ Return a JSON object with:
         query_lower = query.lower()
         scores = {}
         
-        # Calculate scores for each component type
+        # Calculate scores for each component type with improved scoring
         for component_type, patterns in self.iflow_patterns.items():
             score = 0.0
             for pattern in patterns:
                 matches = len(re.findall(pattern, query_lower))
-                score += matches * 0.3  # Weight for each match
+                score += matches * 0.4  # Increased weight for each match
             
-            # Normalize score
-            score = min(1.0, score)
+            # Bonus for exact component type mentions
+            if component_type in query_lower:
+                score += 0.3
+            
+            # Bonus for common iFlow terms
+            iflow_terms = ['iflow', 'integration', 'flow', 'workflow', 'pipeline']
+            if any(term in query_lower for term in iflow_terms):
+                score += 0.2
+            
+            # Normalize score with minimum baseline
+            score = max(0.1, min(1.0, score))  # Ensure minimum 0.1 score
             scores[component_type] = score
         
         # Find primary type
@@ -313,6 +314,24 @@ Return a JSON object with:
         
         # Sort by confidence
         suggestions.sort(key=lambda x: x['confidence'], reverse=True)
+        
+        # If no suggestions above threshold, provide default suggestions
+        if not suggestions:
+            default_suggestions = [
+                {
+                    'component_type': 'action',
+                    'confidence': 0.3,
+                    'description': 'Components that perform specific actions, operations, or API calls',
+                    'examples': ['HTTP request', 'Email sender', 'File operation', 'Database query']
+                },
+                {
+                    'component_type': 'transformer',
+                    'confidence': 0.25,
+                    'description': 'Data transformation components that convert, format, or modify data structures',
+                    'examples': ['JSON to XML', 'Data format conversion', 'Field mapping', 'Encoding/decoding']
+                }
+            ]
+            suggestions = default_suggestions
         
         return suggestions
     
