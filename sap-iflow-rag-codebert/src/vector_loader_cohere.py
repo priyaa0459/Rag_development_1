@@ -20,6 +20,7 @@ from sentence_transformers import SentenceTransformer
 import time
 from datetime import datetime
 import re
+from math import sqrt
 
 
 class SupabaseVectorLoader:
@@ -253,13 +254,58 @@ class SupabaseVectorLoader:
 
     def test_similarity_search(self, query_text: str, top_k: int = 5):
         """Semantic search with CodeBERT embedding and improved matching thresholds.
-        Workflow: threshold 0.5 → if none, threshold 0.0 → if none, keyword fallback. Always request 5 unique instructions.
+        Workflow: CodeBERT-only. Threshold 0.5. No keyword fallback.
+        Additionally, suppress unrelated person-name-like queries.
         """
         print(f"Testing similarity search with query: '{query_text[:100]}...'")
         try:
             # Always embed with CodeBERT
             query_embedding = self.generate_codebert_embedding(query_text)
             print("Query embedding generated using: codebert-base")
+
+            def cosine_similarity(vec_a: List[float], vec_b: List[float]) -> float:
+                """Compute cosine similarity between two vectors."""
+                try:
+                    dot = 0.0
+                    norm_a = 0.0
+                    norm_b = 0.0
+                    for a, b in zip(vec_a, vec_b):
+                        dot += a * b
+                        norm_a += a * a
+                        norm_b += b * b
+                    if norm_a == 0.0 or norm_b == 0.0:
+                        return 0.0
+                    return dot / (sqrt(norm_a) * sqrt(norm_b))
+                except Exception:
+                    return 0.0
+
+            def looks_like_person_name(text: str) -> bool:
+                """Heuristic to detect person-name-like queries (suppress keyword fallback)."""
+                cleaned = text.strip()
+                # 1-2 tokens, alphabetic, capitalized or all lowercase short name
+                tokens = [t for t in re.split(r"\W+", cleaned) if t]
+                if 1 <= len(tokens) <= 2:
+                    if all(re.fullmatch(r"[A-Za-z]{2,}", t or "") for t in tokens):
+                        # Avoid common domain words
+                        domain_words = {
+                            'invoice','billing','iflow','sap','soap','rest','odata','integration','adapter',
+                            'groovy','script','payload','message','endpoint','authentication','token','retry',
+                            'mapping','xml','json','queue','kafka','http','oauth','tenant','subaccount','deployment'
+                        }
+                        lowered = {t.lower() for t in tokens}
+                        if lowered.isdisjoint(domain_words):
+                            return True
+                return False
+
+            def has_domain_keyword_overlap(text: str) -> bool:
+                domain_keywords = {
+                    'invoice','billing','iflow','sap','soap','rest','odata','integration','adapter','groovy',
+                    'script','payload','message','endpoint','authentication','token','retry','mapping','xml',
+                    'json','queue','kafka','http','oauth','tenant','subaccount','deployment','error','log',
+                    'exception','credentials','keystore','certificate','sftp','proxy','hostname','port','tls'
+                }
+                words = {w.lower() for w in re.split(r"\W+", text) if w}
+                return len(words & domain_keywords) > 0
 
             def get_unique_results(match_threshold: float, initial_match_count: int = 20):
                 """Get unique results with given threshold, increasing match_count if needed."""
@@ -303,49 +349,34 @@ class SupabaseVectorLoader:
                 # Return whatever unique results we found
                 return unique_chunks[:top_k]
 
-            # First attempt: threshold 0.5
+            # If the query looks like an unrelated person name and has no domain overlap, short-circuit
+            if looks_like_person_name(query_text) and not has_domain_keyword_overlap(query_text):
+                print("No relevant results found for this query in the dataset.")
+                return []
+
+            # CodeBERT-only search: threshold 0.5
             print("Searching with threshold 0.5...")
             data = get_unique_results(0.5)
             
+            # If nothing above threshold, do not display low-relevance items
             if not data:
-                # Retry with threshold 0.0
-                print("No results at threshold 0.5, retrying with threshold 0.0...")
-                data = get_unique_results(0.0)
+                print("No relevant results found for this query in the dataset.")
+                return []
 
-            if not data:
-                print("No semantic results even at 0.0, using keyword fallback...")
-                data = self._keyword_fallback_search(query_text, limit=top_k)
-                # Ensure keyword results are also unique
-                if data:
-                    unique_chunks = []
-                    seen_instructions = set()
-                    for chunk in data:
-                        instruction = chunk.get('instruction', '').strip()
-                        if instruction and instruction not in seen_instructions:
-                            unique_chunks.append(chunk)
-                            seen_instructions.add(instruction)
-                            if len(unique_chunks) >= top_k:
-                                break
-                    data = unique_chunks[:top_k]
-
-            if data:
-                print(f"Found {len(data)} unique similar chunks:")
-                for i, chunk in enumerate(data):
-                    sim = chunk.get('similarity')
-                    if sim is not None:
-                        print(f"\n{i+1}. Similarity: {sim:.3f}")
-                    else:
-                        print(f"\n{i+1}. Similarity: N/A (keyword match)")
-                    print(f"   Type: {chunk.get('output_type')}")
-                    print(f"   Model: {chunk.get('embedding_model')}")
-                    print(f"   Instruction: {chunk.get('instruction', '')[:100]}...")
-                    # Show metadata model info if present
-                    meta = chunk.get('metadata') if isinstance(chunk, dict) else None
-                    if meta and isinstance(meta, dict) and 'model_info' in meta:
-                        mi = meta['model_info']
-                        print(f"   Source: {mi.get('model_name', 'unknown')} ({mi.get('source_dimension', '?')}D)")
-            else:
-                print("No similar chunks found")
+            print(f"Found {len(data)} unique similar chunks:")
+            for i, chunk in enumerate(data):
+                sim = chunk.get('similarity')
+                if sim is None:
+                    sim = 0.0
+                print(f"\n{i+1}. Similarity: {sim:.3f}")
+                print(f"   Type: {chunk.get('output_type')}")
+                print(f"   Model: {chunk.get('embedding_model')}")
+                print(f"   Instruction: {chunk.get('instruction', '')[:100]}...")
+                # Show metadata model info if present
+                meta = chunk.get('metadata') if isinstance(chunk, dict) else None
+                if meta and isinstance(meta, dict) and 'model_info' in meta:
+                    mi = meta['model_info']
+                    print(f"   Source: {mi.get('model_name', 'unknown')} ({mi.get('source_dimension', '?')}D)")
             return data
         except Exception as e:
             print(f"Error testing similarity search: {e}")
@@ -440,8 +471,8 @@ def main():
 
     test_queries = [
         "Create an invoice request integration flow",
-        "SOAP parameters for iFlow",
-        "Business partner replication"
+        "SAP Cloud Integration package",
+        "sarika"
     ]
     
     for i, query in enumerate(test_queries):
