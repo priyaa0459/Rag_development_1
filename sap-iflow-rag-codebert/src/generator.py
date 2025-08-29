@@ -132,6 +132,33 @@ Instructions:
 Generate the complete integration steps and configuration:"""
         }
     
+    def _dedup_search_results(self, results: List[SearchResult]) -> List[SearchResult]:
+        """Filter duplicate contexts by instruction, chunk_id, or output_code while preserving order."""
+        if not results:
+            return results
+        seen_instr = set()
+        seen_chunks = set()
+        seen_code = set()
+        unique: List[SearchResult] = []
+        for r in results:
+            instr = (r.instruction or "").strip()
+            cid = (r.chunk_id or "").strip()
+            code = (r.output_code or "").strip()
+            if instr and instr in seen_instr:
+                continue
+            if cid and cid in seen_chunks:
+                continue
+            if code and code in seen_code:
+                continue
+            unique.append(r)
+            if instr:
+                seen_instr.add(instr)
+            if cid:
+                seen_chunks.add(cid)
+            if code:
+                seen_code.add(code)
+        return unique
+    
     def build_context_from_results(self, search_results: List[SearchResult]) -> str:
         """
         Build context string from SearchResult objects for prompt generation.
@@ -181,9 +208,17 @@ Generate the complete integration steps and configuration:"""
         print("=" * 60)
         
         try:
-            # Build context from search results
-            context = self.build_context_from_results(request.search_results)
-            print(f"📚 Built context from {len(request.search_results)} search results")
+            # Deduplicate search results to ensure diverse context
+            original_count = len(request.search_results)
+            unique_results = self._dedup_search_results(request.search_results)
+            if len(unique_results) < original_count:
+                print(f"⚠️ Duplicate contexts filtered: {original_count - len(unique_results)} removed. Using {len(unique_results)} unique chunks.")
+            if len(unique_results) < max(1, min(3, original_count)):
+                print(f"⚠️ Low diversity context: only {len(unique_results)} unique chunks available for prompt.")
+
+            # Build context from unique results
+            context = self.build_context_from_results(unique_results)
+            print(f"📚 Built context from {len(unique_results)} search results")
             
             # Get appropriate prompt template
             if request.output_type not in self.prompt_templates:
@@ -217,8 +252,8 @@ Generate the complete integration steps and configuration:"""
             # Validate the generated code
             validation_status = self._validate_generated_code(generated_text, request.output_type)
             
-            # Calculate confidence score (simplified - could be enhanced)
-            confidence_score = self._calculate_confidence_score(request.search_results)
+            # Calculate confidence score (simplified - could be enhanced) on unique results
+            confidence_score = self._calculate_confidence_score(unique_results)
             
             # Create output object
             output = GeneratedOutput(
@@ -227,7 +262,7 @@ Generate the complete integration steps and configuration:"""
                 generated_code=generated_text,
                 validation_status=validation_status,
                 confidence_score=confidence_score,
-                context_chunks_used=[f"{r.chunk_id}: {r.instruction[:100]}..." for r in request.search_results],
+                context_chunks_used=[f"{r.chunk_id}: {r.instruction[:100]}..." for r in unique_results],
                 generation_metadata={
                     'model': 'cohere-command',
                     'max_tokens': request.max_tokens,
