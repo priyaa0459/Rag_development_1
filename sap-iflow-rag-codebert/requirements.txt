@@ -8,3 +8,6 @@ scikit-learn
 matplotlib
 seaborn
 torch
+fastapi
+uvicorn
+python-dotenv
