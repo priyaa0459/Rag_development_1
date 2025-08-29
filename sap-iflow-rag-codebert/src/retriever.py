@@ -71,6 +71,44 @@ class SAPiFlowRetriever:
             print("Falling back to CodeBERT-only retrieval")
             self.models_initialized = False
     
+    def _dedup_candidates(self, items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Remove duplicates by instruction and chunk_id while preserving order."""
+        seen_instr = set()
+        seen_chunks = set()
+        unique: List[Dict[str, Any]] = []
+        for it in items:
+            instr = (it.get('instruction') or '').strip()
+            cid = (it.get('chunk_id') or '').strip()
+            if instr and instr in seen_instr:
+                continue
+            if cid and cid in seen_chunks:
+                continue
+            unique.append(it)
+            if instr:
+                seen_instr.add(instr)
+            if cid:
+                seen_chunks.add(cid)
+        return unique
+
+    def _dedup_results(self, results: List[SearchResult]) -> List[SearchResult]:
+        """Remove duplicates in ranked results by instruction and chunk_id."""
+        seen_instr = set()
+        seen_chunks = set()
+        unique: List[SearchResult] = []
+        for r in results:
+            instr = (r.instruction or '').strip()
+            cid = (r.chunk_id or '').strip()
+            if instr and instr in seen_instr:
+                continue
+            if cid and cid in seen_chunks:
+                continue
+            unique.append(r)
+            if instr:
+                seen_instr.add(instr)
+            if cid:
+                seen_chunks.add(cid)
+        return unique
+    
     def retrieve_candidates(self, query: str, top_k: int = 10, 
                           match_threshold: float = 0.5) -> List[Dict[str, Any]]:
         """
@@ -96,24 +134,41 @@ class SAPiFlowRetriever:
             temp_loader.initialize_models()
             query_embedding = temp_loader.generate_codebert_embedding(query)
             
-            print(f"Retrieving top {top_k} candidates with threshold {match_threshold}...")
-            
-            # Use the existing search_sap_iflow_chunks RPC function
-            result = self.supabase.rpc('search_sap_iflow_chunks', {
-                'query_embedding': query_embedding,
-                'match_threshold': match_threshold,
-                'match_count': top_k * 2,  # Get more candidates for re-ranking
-                'filter_model': 'codebert-base'
-            }).execute()
-            
-            candidates = result.data or []
-            
-            if not candidates:
-                print(f"No candidates found above threshold {match_threshold}")
-                return []
-            
-            print(f"Retrieved {len(candidates)} candidates for re-ranking")
-            return candidates
+            # Adaptive retrieval with dedup and retry if diversity is low
+            initial_match_count = max(top_k * 2, 10)
+            match_count = initial_match_count
+            max_attempts = 3
+            all_unique: List[Dict[str, Any]] = []
+
+            for attempt in range(max_attempts):
+                print(f"Retrieving up to {match_count} candidates (attempt {attempt+1}/{max_attempts})...")
+                result = self.supabase.rpc('search_sap_iflow_chunks', {
+                    'query_embedding': query_embedding,
+                    'match_threshold': match_threshold,
+                    'match_count': match_count,
+                    'filter_model': 'codebert-base'
+                }).execute()
+
+                data = result.data or []
+                if not data:
+                    if attempt == 0:
+                        print(f"No candidates found above threshold {match_threshold}")
+                    break
+
+                deduped = self._dedup_candidates(data)
+                all_unique = deduped
+
+                if len(deduped) >= top_k:
+                    print(f"Retrieved {len(deduped)} unique candidates for re-ranking")
+                    break
+
+                if attempt < max_attempts - 1:
+                    print(f"⚠️ Only {len(deduped)} unique candidates found; increasing match_count...")
+                    match_count = min(match_count * 2, 100)
+                else:
+                    print(f"⚠️ Proceeding with {len(deduped)} unique candidates (less than requested {top_k}).")
+
+            return all_unique
             
         except Exception as e:
             print(f"Error in candidate retrieval: {e}")
@@ -169,8 +224,9 @@ class SAPiFlowRetriever:
             # Calculate hybrid scores (weighted combination)
             results = self._calculate_hybrid_scores(results)
             
-            # Sort by hybrid score and return top_k
+            # Sort, de-duplicate, then return top_k
             results.sort(key=lambda x: x.hybrid_score, reverse=True)
+            results = self._dedup_results(results)
             return results[:top_k]
             
         except Exception as e:
@@ -295,7 +351,16 @@ class SAPiFlowRetriever:
         
         # Step 2: Re-rank candidates using cross-encoder
         results = self.re_rank_candidates(query, candidates, top_k)
-        
+
+        # If too few unique results, expand candidate pool and try again
+        if len(results) < top_k:
+            print(f"⚠️ Only {len(results)}/{top_k} unique results after re-ranking. Expanding candidate pool...")
+            expanded_candidates = self.retrieve_candidates(query, top_k * 4, match_threshold)
+            if expanded_candidates:
+                results = self.re_rank_candidates(query, expanded_candidates, top_k)
+            if len(results) < top_k:
+                print(f"⚠️ Still only {len(results)}/{top_k} unique results. Consider tuning thresholds or data diversity.")
+
         # Step 3: Display results
         self._display_results(query, results)
         
